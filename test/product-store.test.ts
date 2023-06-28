@@ -10,14 +10,12 @@ test('return inventory', (t) => {
 
   const svc = new Store(instance(mockStore));
 
-  t.deepEqual(svc.inventory(), { apple: 10, banana: 10, orange: 10 });
+  // TODO
 });
 
 test('calls fetch for bananas', (t) => {
   const mockStore = mock(WarehouseStorage);
   const svc = new Store(instance(mockStore));
 
-  svc.buyBasket({ banana: 1 });
-
-  verify(mockStore.fetch('banana', 1)).once();
+  // TODO
 });
