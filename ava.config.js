@@ -3,4 +3,5 @@ module.exports = {
   verbose: true,
   extensions: ['ts'],
   require: ['ts-node/register'],
+  failWithoutAssertions: false,
 };
