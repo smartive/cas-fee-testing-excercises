@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Feathers Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.46.1/dist/full.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://feathersjs.com/feathers-chat.css" />
+</head>
+
+<body data-theme="dracula">
+    <main id="main" class="p-8">
+        <h1 class="font-medium leading-tight text-5xl mt-0 mb-2">Welcome to Feathers</h1>
+
+        <h2 class="pt-1 pb-2 text-lg">Messages</h2>
+    </main>
+
+    <script src="//unpkg.com/@feathersjs/client@^5.0.0/dist/feathers.js"></script>
+    <script type="text/javascript">
+        function addMessage(message) {
+            document.getElementById('main').innerHTML += `<div class="chat chat-start" id="${message.id}">
+          <div class="chat-bubble">${message.text}</div>
+        </div>`;
+        }
+
+        async function main() {
+
+            // fetch messages
+            const messages = await fetch('http://localhost:3030/messages', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            const messagesJson = await messages.json();
+
+            messagesJson.forEach(message => {
+                addMessage(message);
+            });
+        }
+        main();
+
+    </script>
+</body>
+
+</html>
