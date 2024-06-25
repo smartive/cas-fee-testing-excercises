@@ -43,11 +43,15 @@ test('display message from other user', async ({ page: firstSessionPage, browser
 });
 
 test('test with mocked api', async ({ page }) => {
-  // TODO: Mock API Requests
+  await page.route('**/messages', async route => {
+    const json = [{ text: 'hey from api mock 1', id: 0 }, { text: 'hey from api mock 2', id: 1 }];
+    await route.fulfill({ json });
+  });
 
   await page.goto('http://localhost:3030/api.html');
 
   await expect(page.getByText('Message')).toBeVisible();
 
-  // TODO: check for new message with mocked api
+  await expect(page.getByText('hey from api mock 1')).toBeVisible();
+  await expect(page.getByText('hey from api mock 2')).toBeVisible();
 });
