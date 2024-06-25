@@ -45,9 +45,9 @@ test('display message from other user', async ({ page: firstSessionPage, browser
 test('test with mocked api', async ({ page }) => {
   // TODO: Mock API Requests
 
-  await page.goto('http://localhost:3030/');
+  await page.goto('http://localhost:3030/api.html');
 
-  await expect(page.getByPlaceholder('Message')).toBeVisible();
+  await expect(page.getByText('Message')).toBeVisible();
 
   // TODO: check for new message with mocked api
 });
