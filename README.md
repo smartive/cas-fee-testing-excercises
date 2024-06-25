@@ -22,3 +22,23 @@ test('add should return the sum of two numbers', () => {
 ```
 
 Testing can be done manually or automatically. Automated testing is typically preferred because it can be faster and more reliable than manual testing. Automated testing can be done using testing frameworks such as Jest or AVA.
+
+
+# Run the unit tests
+
+```bash
+npm run test
+```
+
+or 
+
+```bash
+npm run test:watch
+```
+
+# Run the web tests
+
+```bash
+npm run start
+npm run test:web
+```
