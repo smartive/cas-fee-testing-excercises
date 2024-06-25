@@ -16,7 +16,7 @@ test('add message to chat', async ({ page }) => {
 
   await page.getByText('SEND').click();
 
-  // TODO: check for new message to be displayed
+  await expect(page.getByText('hello world')).toBeVisible();
 });
 
 test('display message from other user', async ({ page: firstSessionPage, browser }) => {
@@ -27,10 +27,10 @@ test('display message from other user', async ({ page: firstSessionPage, browser
 
   await expect(secondSessionPage.getByText('Hello world from the server')).toBeVisible();
 
-  await firstSessionPage.getByPlaceholder('Message').fill('hello world');
+  await firstSessionPage.getByPlaceholder('Message').fill('hello world from session one');
   await firstSessionPage.getByText('SEND').click();
 
-  // TODO: check for new message to be displayed
+  await expect(secondSessionPage.getByText('hello world from session one')).toBeVisible();
 });
 
 test('test with mocked api', async ({ page }) => {
