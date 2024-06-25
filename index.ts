@@ -24,6 +24,15 @@ class MessageService {
 
     return message
   }
+
+  async remove(data: Message) {
+    if (data.id && (data.id < 0 || data.id >= this.messages.length)) {
+      this.messages.splice(data.id, 1);
+      return;
+    }
+
+    this.messages = [];
+  }
 }
 
 type ServiceTypes = {
