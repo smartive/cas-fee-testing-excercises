@@ -1,5 +1,14 @@
 import { expect, test } from '@playwright/test';
 
+test.beforeEach(async ({page}) => {
+  await page.goto('http://localhost:3030/');
+
+  await expect(page.getByText('Clear All')).toBeVisible();
+  await page.getByText('Clear All').click();
+
+  await expect(page.getByText('Hello world from the server')).not.toBeVisible();
+})
+
 test('has title', async ({ page }) => {
   await page.goto('http://localhost:3030/');
 
@@ -13,7 +22,6 @@ test('add message to chat', async ({ page }) => {
   await page.getByPlaceholder('Message').fill('hello world');
 
   await expect(page.getByText('SEND')).toBeVisible();
-
   await page.getByText('SEND').click();
 
   // TODO: check for new message to be displayed
@@ -25,7 +33,8 @@ test('display message from other user', async ({ page: firstSessionPage, browser
   const secondSessionPage = await browser.newPage();
   await secondSessionPage.goto('http://localhost:3030/');
 
-  await expect(secondSessionPage.getByText('Hello world from the server')).toBeVisible();
+  await expect(firstSessionPage.getByPlaceholder('Message')).toBeVisible();
+  await expect(secondSessionPage.getByPlaceholder('Message')).toBeVisible();
 
   await firstSessionPage.getByPlaceholder('Message').fill('hello world');
   await firstSessionPage.getByText('SEND').click();
