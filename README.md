@@ -39,6 +39,9 @@ npm run test:watch
 # Run the web tests
 
 ```bash
-npm run start
 npm run test:web
+
+or 
+
+npm run test:web:headed
 ```
